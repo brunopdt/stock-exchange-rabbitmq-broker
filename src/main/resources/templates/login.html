@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
 
 <head>
 	<meta charset="UTF-8">
 	<title>Login</title>
 	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
 	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
-    <link rel="stylesheet" href="styleLogin.css">
+    <link rel="stylesheet" href="/styleLogin.css">
 </head>
 
 <body class="screen_body">
@@ -14,7 +14,7 @@
 	<div class="container">
 		<div class="screen">
 			<div class="screen__content">
-				<form class="login" method="POST" action="/login">
+				<form class="login" method="POST" action="/broker/login">
 					<h2 class="title__login">Bem vindo ao BLSB!</h2>
 					<div class="login__field">
 						<i class="login__icon fas fa-envelope"></i>
@@ -30,7 +30,7 @@
 					</button>
 			
 					<div class="login__field__register">
-						<p>Não possui conta? <a href="cadastro" style="text-decoration: none;">Cadastrar</a></p>
+						<p>Não possui conta? <a href="register" style="text-decoration: none;">Cadastrar</a></p>
 					</div>
 	
 
@@ -48,7 +48,7 @@
 	<!-- Ajustar -->
 	<script>
 		function redirectCadastro() {
-			window.location.href = 'cadastro.html';
+			window.location.href = 'register.html';
 		}
 	</script>
 

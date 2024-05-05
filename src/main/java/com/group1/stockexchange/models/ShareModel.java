@@ -10,7 +10,7 @@ import lombok.*;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class Share {
+public class ShareModel {
     @Id
     private String code;
     private String name;

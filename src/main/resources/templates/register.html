@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro</title>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
+    <link rel="stylesheet" href="/styleRegister.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="screen">
+            <div class="screen__content">
+                <form class="signup" method="POST" action="/broker/register">
+                    <h2 class="title__register">Realize seu cadastro!</h2>
+                    <div class="register__field">
+                        <i class="register__icon fas fa-user"></i>
+                        <input type="text" class="register__input" placeholder="Nome" name="name" th:value="${name}">
+                    </div>
+                    <div class="register__field">
+                        <i class="register__icon fas fa-envelope"></i>
+                        <input type="email" class="register__input" placeholder="Email" name="email" th:value="${email}">
+                    </div>
+                    <div class="register__field">
+                        <i class="register__icon fas fa-lock"></i>
+                        <input type="password" class="register__input" placeholder="Senha" name="password" th:value="${password}">
+                    </div>
+                    <button type="submit" class="button register__submit">
+						<span class="button__text">Cadastrar</span>
+						<i class="button__icon fas fa-chevron-right"></i>
+					</button>
+                
+                    <div class="register__field__register">
+						<p>Já possui conta? <a href="login" style="text-decoration: none;">Login</a></p>
+					</div>
+                </form>
+
+            </div>
+            <div class="screen__background">
+                <span class="screen__background__shape screen__background__shape4"></span>
+                <span class="screen__background__shape screen__background__shape3"></span>
+                <span class="screen__background__shape screen__background__shape2"></span>
+                <span class="screen__background__shape screen__background__shape1"></span>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

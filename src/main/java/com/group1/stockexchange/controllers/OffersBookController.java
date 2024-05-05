@@ -1,6 +1,6 @@
 package com.group1.stockexchange.controllers;
 
-import com.group1.stockexchange.models.OffersBook;
+import com.group1.stockexchange.models.OffersBookModel;
 import com.group1.stockexchange.services.OffersBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -19,7 +19,7 @@ public class OffersBookController {
     private OffersBookService offersBookService;
 
     @GetMapping("/broker/{id}")
-    public List<OffersBook> getBrokerPurchasedShares(@PathVariable Long id) {
+    public List<OffersBookModel> getBrokerPurchasedShares(@PathVariable Long id) {
         return offersBookService.getBrokerPurchasedShares(id);
     }
 }

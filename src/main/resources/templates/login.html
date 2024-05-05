@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Login</title>
+	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/all.css'>
+	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css'>
+    <link rel="stylesheet" href="styleLogin.css">
+</head>
+
+<body class="screen_body">
+	
+	<div class="container">
+		<div class="screen">
+			<div class="screen__content">
+				<form class="login" method="POST" action="/login">
+					<h2 class="title__login">Bem vindo ao BLSB!</h2>
+					<div class="login__field">
+						<i class="login__icon fas fa-envelope"></i>
+						<input type="text" class="login__input" placeholder="Email" name="email" th:value="${email}">
+					</div>
+					<div class="login__field">
+						<i class="login__icon fas fa-lock"></i>
+						<input type="password" class="login__input" placeholder="Senha" name="password" th:value="${password}">
+					</div>
+					<button type="submit" class="button login__submit">
+						<span class="button__text">Login</span>
+						<i class="button__icon fas fa-chevron-right"></i>
+					</button>
+			
+					<div class="login__field__register">
+						<p>Não possui conta? <a href="cadastro" style="text-decoration: none;">Cadastrar</a></p>
+					</div>
+	
+
+				</form>
+			</div>
+			<div class="screen__background">
+				<span class="screen__background__shape screen__background__shape4"></span>
+				<span class="screen__background__shape screen__background__shape3"></span>
+				<span class="screen__background__shape screen__background__shape2"></span>
+				<span class="screen__background__shape screen__background__shape1"></span>
+			</div>
+		</div>
+	</div>
+
+	<!-- Ajustar -->
+	<script>
+		function redirectCadastro() {
+			window.location.href = 'cadastro.html';
+		}
+	</script>
+
+</body>
+
+</html>

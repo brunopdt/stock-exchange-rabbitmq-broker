@@ -1,6 +1,6 @@
 package com.group1.stockexchange.controllers;
 
-import com.group1.stockexchange.models.Transaction;
+import com.group1.stockexchange.models.TransactionModel;
 import com.group1.stockexchange.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -19,7 +19,7 @@ public class TransactionController {
     private TransactionService transactionService;
 
     @GetMapping("/broker/{id}")
-    public List<Transaction> getBrokerTransactions(@PathVariable Long id) {
+    public List<TransactionModel> getBrokerTransactions(@PathVariable Long id) {
         return transactionService.getBrokerTransactions(id);
     }
 }

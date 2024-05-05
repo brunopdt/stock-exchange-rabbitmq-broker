@@ -36,6 +36,38 @@
         </div>
     </div>
 
+    <dialog id="buyDialog">
+        <form id="buyForm">
+            <h5 class="modal-title">Compra de Ação</h5>
+            <div class="form-group">
+                <label for="quantity">Quantidade:</label>
+                <input type="number" class="form-control" id="quantity" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Valor:</label>
+                <input type="number" class="form-control" id="price" required>
+            </div>
+            <button type="button" class="btn btn-secondary" id="cancelBuy">Cancelar</button>
+            <button type="button" id="confirmBuy" class="btn btn-primary">Confirmar Compra</button>
+        </form>
+    </dialog>
+
+    <dialog id="sellDialog">
+        <form id="sellForm">
+            <h5 class="modal-title-sell">Venda de Ação</h5>
+            <div class="form-group-sell">
+                <label for="quantity-sell">Quantidade:</label>
+                <input type="number" class="form-control" id="quantity-sell" required>
+            </div>
+            <div class="form-group">
+                <label for="price-sell">Valor:</label>
+                <input type="number" class="form-control" id="price-sell" required>
+            </div>
+            <button type="button" class="btn btn-secondary" id="cancelSell">Cancelar</button>
+            <button type="button" id="confirmSell" class="btn btn-primary">Confirmar Venda</button>
+        </form>
+    </dialog>
+
     <script src="/scripts/shareList.js"></script>
 </body>
 

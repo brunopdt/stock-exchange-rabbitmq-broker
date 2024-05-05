@@ -55,6 +55,65 @@ async function getSharesForPurchase() {
             `;
         sharesList.appendChild(li);
     });
+
+    let currentShareCode = null;
+    const buyModal = document.getElementById('buyDialog');
+    try {
+        
+        const buyButtons = document.querySelectorAll('.btn-buy');
+        buyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                currentShareCode = button.parentElement.querySelector('strong').textContent.split(' - ')[0];
+                
+                if (buyModal) {
+                    const modalTitle = buyModal.querySelector('.modal-title');
+                if (modalTitle) {
+                    modalTitle.textContent = `Compra de ${currentShareCode}`; 
+                }
+                    buyModal.showModal(); 
+                }
+            });
+        });
+
+        const confirmBuyButton = document.getElementById('confirmBuy');
+        const cancelBuyButton = document.getElementById('cancelBuy');
+        cancelBuyButton.addEventListener('click', async (event) => { 
+            event.preventDefault();
+            buyModal.close();
+        });
+        confirmBuyButton.addEventListener('click', async (event) => { 
+            event.preventDefault();
+            const quantity = document.getElementById('quantity').value;
+            const value = document.getElementById('price').value;
+
+            try {
+                //const brokerId = localStorage.getItem('brokerId'); //TODO ajustar para pegar dinamicamente o id do usu logado
+                const response = await fetch('http://localhost:8080/transaction/buy', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        brokerId: 1,
+                        active: currentShareCode,
+                        quantity: quantity,
+                        value: value
+                    })
+                });
+                if (response.ok) {
+                    console.log('Compra realizada com sucesso!');
+                    buyModal.close()
+                } else {
+                    console.error('Erro ao realizar compra:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Erro ao realizar compra:', error);
+            }
+        });
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
 
 async function getPurchasedShares() {
@@ -79,12 +138,72 @@ async function getPurchasedShares() {
                     <br>
                     <span>Comprada por: ${share.price} - Quantidade: ${share.quantity}</span>
                 </div>
-                <button class="btn btn-buy float-right" data-toggle="modal" data-target="#sellModal">VENDER</button>
+                <button class="btn btn-buy btn-sell float-right" data-toggle="modal" data-target="#sellModal">VENDER</button>
                 <button class="btn btn-buy float-right" data-toggle="modal" data-target="#trackModal">ACOMPANHAR</button>
             `;
             sharesList.appendChild(li);
         });
     }
+
+let currentShareCode = null;
+const sellModal = document.getElementById('sellDialog');
+try {
+    
+    const sellButtons = document.querySelectorAll('.btn-sell');
+    sellButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            currentShareCode = button.parentElement.querySelector('strong').textContent.split(' - ')[0];
+            
+            if (sellModal) {
+                const modalTitle = sellModal.querySelector('.modal-title-sell');
+            if (modalTitle) {
+                modalTitle.textContent = `Venda de ${currentShareCode}`;
+            }
+                sellModal.showModal();
+            }
+        });
+    });
+
+    const confirmSellButton = document.getElementById('confirmSell');
+    const cancelSellButton = document.getElementById('cancelSell');
+    cancelSellButton.addEventListener('click', async (event) => { 
+        event.preventDefault();
+        sellModal.close();
+    });
+    confirmSellButton.addEventListener('click', async (event) => { 
+        event.preventDefault();
+        const quantity = document.getElementById('quantity-sell').value;
+        const value = document.getElementById('price-sell').value;
+
+        try {
+
+            const response = await fetch('http://localhost:8080/transaction/sell', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    brokerId: brokerId,
+                    active: currentShareCode,
+                    quantity: quantity,
+                    value: value
+                })
+            });
+            if (response.ok) {
+                console.log('Venda realizada com sucesso!');
+                sellModal.close()
+            } else {
+                console.error('Erro ao realizar venda:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Erro ao realizar venda:', error);
+        }
+    });
+
+} catch (error) {
+    console.error('Error:', error);
+}
+
 }
 
 async function getTransactions() {
@@ -114,3 +233,6 @@ async function getTransactions() {
         });
     }
 }
+
+
+    

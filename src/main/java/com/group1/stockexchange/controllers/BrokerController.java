@@ -1,50 +1,46 @@
 package com.group1.stockexchange.controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import com.group1.stockexchange.services.BrokerService;
 
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 
-@Controller
+@RestController
+@RequestMapping("/broker")
+@Validated
 public class BrokerController {
-    
-    private final BrokerService brokerService;
+    @Autowired
+    private BrokerService brokerService;
 
-    BrokerController(BrokerService brokerService) {
-        this.brokerService = brokerService;
-    }
-  
+
     @GetMapping("/login")
     public ModelAndView login() {
-        ModelAndView mv = new ModelAndView("login");
-        return mv;
+        return new ModelAndView("login");
     }
-      
+
     @PostMapping("/login")
     public String postMethodName(@RequestParam("email") String email,
                               @RequestParam("password") String password,
                               Model model) {
         if (brokerService.isValidBroker(email, password)) {
-            return "redirect:/cadastro";
+            return "redirect:/register";
         } else{
              model.addAttribute("message", "Login inválido");
             return "login";
         }
     }
 
-    @GetMapping("/cadastro")
-    public ModelAndView cadastro() {
-        ModelAndView mv = new ModelAndView("cadastro");
-        return mv;
+    @GetMapping("/register")
+    public ModelAndView register() {
+        return new ModelAndView("register");
     }
 
-    @PostMapping("/cadastro")
+    @PostMapping("/register")
     public String postMethodName(@RequestParam("name") String name,
                               @RequestParam("email") String email,
                               @RequestParam("password") String password,
@@ -53,11 +49,11 @@ public class BrokerController {
         // Verifica se o email já está cadastrado
         if (brokerService.isEmailAlreadyRegistered(email)) {
             model.addAttribute("error", "O email fornecido já está cadastrado. Por favor, use outro email.");
-            return "cadastro"; 
+            return "register";
         }
 
         // Se o email não estiver cadastrado, proceder com o cadastro
-        brokerService.cadastrarUsuario(name, email, password);
+        brokerService.registerUser(name, email, password);
         return "redirect:/login"; 
     }    
 

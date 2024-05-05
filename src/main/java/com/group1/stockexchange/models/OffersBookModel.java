@@ -21,7 +21,7 @@ public class OffersBookModel {
 
     @ManyToOne
     @JoinColumn(name = "shareCode")
-    private Share share;
+    private ShareModel share;
 
     @ManyToOne
     @JoinColumn(name = "brokerId")

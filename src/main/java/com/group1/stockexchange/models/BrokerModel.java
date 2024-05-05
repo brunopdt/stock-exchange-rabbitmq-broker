@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name="BROKERS")
-public class Broker {
+public class BrokerModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -13,13 +13,13 @@ public class Broker {
 
     private String password;
 
-    private double email;
+    private String email;
 
-    public Broker(){
+    public BrokerModel(){
 
     }
 
-    public Broker(Long id, String name, String password, double email) {
+    public BrokerModel(Long id, String name, String password, String email) {
         super();
         this.id = id;
         this.name = name;
@@ -51,11 +51,11 @@ public class Broker {
         this.password = password;
     }
 
-    public double getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(double email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 }

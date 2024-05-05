@@ -21,13 +21,13 @@ public class Transaction {
 
     @ManyToOne
     @JoinColumn(name = "brokerId")
-    private Broker broker;
+    private BrokerModel broker;
 
     public Transaction(){
 
     }
 
-    public Transaction(Long id, int quantity, double value, Date transactionDate, Share share, Broker broker) {
+    public Transaction(Long id, int quantity, double value, Date transactionDate, Share share, BrokerModel broker) {
         super();
         this.id = id;
         this.quantity = quantity;
@@ -77,11 +77,11 @@ public class Transaction {
         this.share = share;
     }
 
-    public Broker getBroker() {
+    public BrokerModel getBroker() {
         return broker;
     }
 
-    public void setBroker(Broker broker) {
+    public void setBroker(BrokerModel broker) {
         this.broker = broker;
     }
 }

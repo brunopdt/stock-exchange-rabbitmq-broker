@@ -96,7 +96,6 @@ async function getTransactions() {
 
 
     const sharesList = document.getElementById('shares-for-purchase-list');
-    console.log(sharesList)
 
     sharesList.innerHTML = '';
 

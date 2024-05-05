@@ -3,29 +3,27 @@ package com.group1.stockexchange.models;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
-
 @Entity
-@Table(name="TRANSACTIONS")
+@Table(name="OFFERS_BOOKS")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
-public class Transaction {
+public class OffersBookModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String type;
     private int quantity;
-    private double value;
-    private Date transactionDate;
+    private double price;
 
     @ManyToOne
     @JoinColumn(name = "shareCode")
-    private Share share;
+    private ShareModel share;
 
     @ManyToOne
     @JoinColumn(name = "brokerId")
-    private Broker broker;
+    private BrokerModel broker;
 }

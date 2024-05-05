@@ -1,6 +1,6 @@
 package com.group1.stockexchange.controllers;
 
-import com.group1.stockexchange.models.Share;
+import com.group1.stockexchange.models.ShareModel;
 import com.group1.stockexchange.services.ShareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -18,7 +18,7 @@ public class ShareController {
     private ShareService shareService;
 
     @GetMapping("/")
-    public List<Share> getShares() {
+    public List<ShareModel> getShares() {
         return shareService.getShares();
     }
 }

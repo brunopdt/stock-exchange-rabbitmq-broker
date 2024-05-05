@@ -1,0 +1,51 @@
+body {
+    background-image: url('../../assets/background.png');
+    background-size: cover;
+    color: #fff;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.8);
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 50px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+.list-group-item {
+    background-color: #e4e4eec3;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.btn-buy {
+    background-color: #5D54A4;
+    border: none;
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-buy:hover {
+    background-color: #5348a8;
+}
+
+h1 {
+    color: #332e5d;
+}
+
+.nav-tabs .nav-link {
+    color: #8c8c8c;
+    background-color: #e6e6e6;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-tabs .nav-link.active {
+    color: #5348a8;
+    background-color: #e4e4eec3;
+    border-color: #5348a8;
+    border-bottom: 3px solid #5348a8; /* Linha inferior com a cor da tab selecionada */
+}

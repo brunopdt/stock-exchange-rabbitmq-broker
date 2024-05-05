@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Ativos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <ul class="nav nav-tabs mt-4" id="myTabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="shares-for-purchase-tab" data-toggle="tab" href="#shares-for-purchase"
+                    role="tab" aria-controls="shares-for-purchase" aria-selected="true">Ações para Compra</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="purchased-shares-tab" data-toggle="tab" href="#purchased-shares" role="tab"
+                aria-controls="purchased-shares" aria-selected="false">Minhas Ações</a>
+            
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="track-transaction-tab" data-toggle="tab" href="#track-transaction"
+                    role="tab" aria-controls="track-transaction" aria-selected="false">Transações</a>
+            </li>
+        </ul>
+        <div class="tab-content mt-4" id="myTabContent">
+            <div class="tab-pane fade show active" id="shares-for-purchase" role="tabpanel" aria-labelledby="shares-for-purchase">
+                <div class="container">
+                    <ul id="shares-for-purchase-list" class="list-group mt-4"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>

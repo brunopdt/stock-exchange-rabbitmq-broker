@@ -13,15 +13,29 @@ import org.springframework.stereotype.Service;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+/**
+ * Serviço referente às transações
+ */
 @Service
 public class TransactionService {
     @Autowired
     private TransactionRepository transactionRepository;
 
+    /**
+     * Retorna as transações de um corretor
+     * @param id id do corretor
+     * @return lista de transações
+     */
     public List<TransactionModel> getBrokerTransactions(Long id) {
         return transactionRepository.findByBrokerId(id);
     }
 
+    /**
+     * Publica uma mensagem na fila de ordens
+     * @param orderDTO DTO da ordem
+     * @param orderType tipo da ordem
+     * @return mensagem de sucesso ou erro
+     */
     public String publishMessage(OrderDTO orderDTO, String orderType) {
         ConnectionFactory factory = RabbitMqConfig.getConnectionFactory();
 

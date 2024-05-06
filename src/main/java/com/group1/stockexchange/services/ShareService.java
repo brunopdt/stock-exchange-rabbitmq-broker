@@ -7,11 +7,18 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Serviço referente às ações
+ */
 @Service
 public class ShareService {
     @Autowired
     private ShareRepository shareRepository;
 
+    /**
+     * Retorna todas as ações
+     * @return lista de ações
+     */
     public List<ShareModel> getShares(){
         return shareRepository.findAll();
     }

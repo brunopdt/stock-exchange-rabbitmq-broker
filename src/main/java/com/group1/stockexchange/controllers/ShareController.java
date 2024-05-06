@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * Controller referente às ações para as páginas de listagem de ações
+ */
 @RestController
 @RequestMapping("/share")
 @Validated
@@ -17,6 +20,10 @@ public class ShareController {
     @Autowired
     private ShareService shareService;
 
+    /**
+     * Retorna as ações disponíveis
+     * @return Lista de ações
+     */
     @GetMapping("/")
     public List<ShareModel> getShares() {
         return shareService.getShares();

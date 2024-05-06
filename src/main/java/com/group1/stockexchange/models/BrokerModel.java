@@ -3,6 +3,9 @@ package com.group1.stockexchange.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+/**
+ * Modelo referente ao broker (corretora)
+ */
 @Entity
 @Table(name="BROKERS")
 @AllArgsConstructor

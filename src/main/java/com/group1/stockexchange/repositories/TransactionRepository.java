@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Repositório referente às transações
+ */
 @Repository
 public interface TransactionRepository extends JpaRepository<TransactionModel, Long> {
     List<TransactionModel> findByBrokerId(Long brokerId);

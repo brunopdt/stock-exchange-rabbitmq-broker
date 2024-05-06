@@ -5,6 +5,9 @@ import lombok.*;
 
 import java.util.Date;
 
+/**
+ * Modelo referente a transação
+ */
 @Entity
 @Table(name="TRANSACTIONS")
 @AllArgsConstructor

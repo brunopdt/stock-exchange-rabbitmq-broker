@@ -31,13 +31,13 @@ Este sistema realizado proporciona aos usuários a capacidade de visualizar e ne
 > Etapa 2 - Executar a bolsa de valores
 
 * Execute o StockExchangeRabbitMqApplication localizado na pasta stockExchange através do "Run" da IDE utilizada, ou via terminal 
-* Digite o endereço do servidor ou mantenha como "localhost";
+* Digite o endereço do servidor (https://stock-exchange-rabbitmq-broker.onrender.com) ou mantenha como "localhost";
 * Clique em "Abrir Negociações";
 
 > Etapa 3 - Executar uma corretora 
 
 * Execute o StockExchangeRabbitMqApplication localizado na pasta stockExchange através do "Run" da IDE utilizada, ou via terminal 
-* Digite o endereço do "localhost:8080/broker/cadastro"; ou "localhost:8080/broker/login"
+* Digite o endereço do servidor (https://stock-exchange-rabbitmq-broker.onrender.com/broker/login) ou mantenha como localhost ("localhost:8080/broker/login")
 * Caso possua conta entre com e-mail e senha. Se não, realize o cadastro.
 * Após logar, será exibida a lista de ativos com ações disponíveis para compra
 * Selecione uma ação da bovespa que deseja possuir e clique no botão 'comprar' 

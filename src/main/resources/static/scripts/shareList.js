@@ -1,8 +1,10 @@
+//Função para realizar requisições GET para a API
 async function getApi(path) {
     const response = await fetch(`http://localhost:8080/${path}`, { method: "GET" });
     return response;
 }
 
+//Função para realizar requisições POST para a API
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         await getSharesForPurchase();
@@ -35,6 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
+//Função para listar as ações disponíveis para compra
 async function getSharesForPurchase() {
     const urlParams = new URLSearchParams(window.location.search);
     const userId = urlParams.get('userId');
@@ -121,6 +124,7 @@ async function getSharesForPurchase() {
     }
 }
 
+//Função para listar as ações compradas
 async function getPurchasedShares() {
     const urlParams = new URLSearchParams(window.location.search);
     const userId = urlParams.get('userId');
@@ -212,6 +216,7 @@ try {
 
 }
 
+//Função para listar as transações realizadas
 async function getTransactions() {
     const urlParams = new URLSearchParams(window.location.search);
     const userId = urlParams.get('userId');

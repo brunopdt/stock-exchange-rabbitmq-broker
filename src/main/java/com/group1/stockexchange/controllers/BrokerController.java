@@ -11,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-
+/**
+ * Controller referente ao broker (corretor)
+ */
 @RestController
 @RequestMapping("/broker")
 @Validated
@@ -19,22 +21,37 @@ public class BrokerController {
     @Autowired
     private BrokerService brokerService;
 
-
+    /**
+     * Retorna a página de login
+     * @return
+     */
     @GetMapping("/login")
     public ModelAndView login() {
         return new ModelAndView("login");
     }
 
+    /**
+     * Retorna a página de registro
+     * @return
+     */
     @GetMapping("/register")
     public ModelAndView register() {
         return new ModelAndView("register");
     }
 
+    /**
+     * Retorna a página de listagem de ações
+     * @return
+     */
     @GetMapping("/shares")
     public ModelAndView shareList() {
         return new ModelAndView("share");
     }
 
+    /**
+     * Método para realizar o login do usuário verificando os campos inseridos
+     * @return
+     */
     @PostMapping("/login")
     public RedirectView postMethodName(@RequestParam("email") String email,
                                        @RequestParam("password") String password,
@@ -48,6 +65,10 @@ public class BrokerController {
         }
     }
 
+    /**
+     * Método para realizar o cadastro do usuário 
+     * @return
+     */
     @PostMapping("/register")
     public RedirectView postMethodName(@RequestParam("name") String name,
                                        @RequestParam("email") String email,

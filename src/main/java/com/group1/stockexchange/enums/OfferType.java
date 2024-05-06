@@ -6,8 +6,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum OfferType {
-    PURCHASE("Compra"),
-    SALE("Venda");
+    PURCHASE("buy"),
+    SALE("sell");
 
     private final String description;
 }

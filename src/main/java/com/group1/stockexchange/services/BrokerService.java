@@ -11,9 +11,13 @@ public class BrokerService {
     @Autowired
     private BrokerRepository brokerRepository;
 
-    public boolean isValidBroker(String email, String password) {
+    public BrokerModel isValidBroker(String email, String password) {
         BrokerModel broker = brokerRepository.findByEmail(email);
-        return broker != null && broker.getPassword().equals(password);
+
+        if(broker != null && broker.getPassword().equals(password)){
+            return broker;
+        };
+        return null;
     }
 
     public boolean isEmailAlreadyRegistered(String email) {

@@ -36,6 +36,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 async function getSharesForPurchase() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('userId');
+    const brokerId = userId ?? 1;
+    localStorage.setItem('brokerId', brokerId);
+
     const response = await getApi('share/');
     const shares = await response.json();
 
@@ -87,14 +92,14 @@ async function getSharesForPurchase() {
             const value = document.getElementById('price').value;
 
             try {
-                //const brokerId = localStorage.getItem('brokerId'); //TODO ajustar para pegar dinamicamente o id do usu logado
+                const brokerId = localStorage.getItem('brokerId') ?? 1;
                 const response = await fetch('http://localhost:8080/transaction/buy', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        brokerId: 1,
+                        brokerId: brokerId,
                         active: currentShareCode,
                         stockAmount: quantity,
                         price: value
@@ -117,8 +122,9 @@ async function getSharesForPurchase() {
 }
 
 async function getPurchasedShares() {
-    //const brokerId = localStorage.getItem('brokerId'); //TODO ajustar para pegar dinamicamente o id do usu logado
-    const brokerId = 1;
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('userId');
+    const brokerId = userId ?? 1;
 
     const response = await getApi(`offersBook/broker/${brokerId}`);
     const shares = await response.json();
@@ -207,8 +213,9 @@ try {
 }
 
 async function getTransactions() {
-    //const brokerId = localStorage.getItem('brokerId'); //TODO ajustar para pegar dinamicamente o id do usu logado
-    const brokerId = 1;
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('userId');
+    const brokerId = userId ?? 1;
 
     const response = await getApi(`transaction/broker/${brokerId}`);
     const shares = await response.json();
@@ -224,7 +231,7 @@ async function getTransactions() {
             li.className = "list-group-item";
             li.innerHTML = `
                 <div>
-                    <strong>Transação realizada em: ${share.transactionDate} no valor de: ${share.price} e com quantidade:  ${share.quantity}</strong>
+                    <strong>Transação realizada em: ${share.transactionDate} no valor de: ${share.value} e com quantidade:  ${share.quantity}</strong>
                     <br>
                     <span>Ação: ${share.share.code} - ${share.share.name}</span>
                 </div>

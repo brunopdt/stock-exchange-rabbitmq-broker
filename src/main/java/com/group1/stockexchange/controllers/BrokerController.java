@@ -1,5 +1,6 @@
 package com.group1.stockexchange.controllers;
 
+import com.group1.stockexchange.models.BrokerModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -38,8 +39,9 @@ public class BrokerController {
     public RedirectView postMethodName(@RequestParam("email") String email,
                                        @RequestParam("password") String password,
                                        Model model) {
-        if (brokerService.isValidBroker(email, password)) {
-            return new RedirectView("/broker/shares");
+        BrokerModel broker = brokerService.isValidBroker(email, password);
+        if (broker != null) {
+            return new RedirectView("/broker/shares?userId=" + broker.getId());
         } else{
             model.addAttribute("message", "Login inválido");
             return new RedirectView("/broker/login");

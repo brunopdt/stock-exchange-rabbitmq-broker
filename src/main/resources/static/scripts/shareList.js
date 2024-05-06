@@ -67,9 +67,9 @@ async function getSharesForPurchase() {
                 
                 if (buyModal) {
                     const modalTitle = buyModal.querySelector('.modal-title');
-                if (modalTitle) {
-                    modalTitle.textContent = `Compra de ${currentShareCode}`; 
-                }
+                    if (modalTitle) {
+                        modalTitle.textContent = `Compra de ${currentShareCode}`;
+                    }
                     buyModal.showModal(); 
                 }
             });
@@ -96,8 +96,8 @@ async function getSharesForPurchase() {
                     body: JSON.stringify({
                         brokerId: 1,
                         active: currentShareCode,
-                        quantity: quantity,
-                        value: value
+                        stockAmount: quantity,
+                        price: value
                     })
                 });
                 if (response.ok) {
@@ -185,8 +185,8 @@ try {
                 body: JSON.stringify({
                     brokerId: brokerId,
                     active: currentShareCode,
-                    quantity: quantity,
-                    value: value
+                    stockAmount: quantity,
+                    price: value
                 })
             });
             if (response.ok) {

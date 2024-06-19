@@ -1,11 +1,22 @@
 import { Image, StyleSheet, Platform } from 'react-native';
-
+import React, { useState } from 'react';
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import LoginScreen from '../screens/LoginScreen/LoginScreen';
 
 export default function HomeScreen() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true); // Simula um login bem-sucedido
+  };
+
+  if (!isLoggedIn) {
+    return <LoginScreen  />;
+  }
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}

@@ -7,7 +7,7 @@ import { ThemedView } from '@/components/ThemedView';
 import LoginScreen from '../screens/LoginScreen/LoginScreen';
 
 export default function HomeScreen() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  /*const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = () => {
     setIsLoggedIn(true); // Simula um login bem-sucedido
@@ -15,7 +15,7 @@ export default function HomeScreen() {
 
   if (!isLoggedIn) {
     return <LoginScreen  />;
-  }
+  }*/
 
   return (
     <ParallaxScrollView

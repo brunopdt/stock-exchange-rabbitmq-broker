@@ -1,22 +1,15 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  Alert,
-} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const navigation = useNavigation<any>();
 
   const handleLogin = () => {
     if (email && password) {
-      Alert.alert('Login', `Email: ${email}\nPassword: ${password}`);
+      navigation.navigate('ActionsForPurchaseScreen');
     } else {
       Alert.alert('Erro', 'Por favor, preencha ambos os campos');
     }
@@ -43,8 +36,6 @@ const LoginScreen = () => {
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
-
-    
     </View>
   );
 };

@@ -1,6 +1,6 @@
 //Função para realizar requisições GET para a API
 async function getApi(path) {
-    const response = await fetch(`https://stock-exchange-rabbitmq-broker.onrender.com/${path}`, { method: "GET" });
+    const response = await fetch(`https://stock-exchange-rabbitmq-broker-gndb.onrender.com/${path}`, { method: "GET" });
     //Para rodar local descomentar o código abaixo
     //const response = await fetch(`http://localhost:8080/${path}`, { method: "GET" });
     return response;
@@ -99,7 +99,7 @@ async function getSharesForPurchase() {
             try {
                 const brokerId = localStorage.getItem('brokerId') ?? 1;
                 //para rodar local trocar a url para http://localhost:8080/transaction/buy
-                const response = await fetch('https://stock-exchange-rabbitmq-broker.onrender.com/transaction/buy', {
+                const response = await fetch('https://stock-exchange-rabbitmq-broker-gndb.onrender.com/transaction/buy', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -190,7 +190,7 @@ try {
 
         try {
             //para rodar local trocar url para http://localhost:8080/transaction/sell
-            const response = await fetch('https://stock-exchange-rabbitmq-broker.onrender.com/transaction/sell', {
+            const response = await fetch('https://stock-exchange-rabbitmq-broker-gndb.onrender.com/transaction/sell', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

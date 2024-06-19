@@ -1,18 +1,33 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import LoginService from '@/app/services/LoginService';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation<any>();
 
-  const handleLogin = () => {
-    if (email && password) {
-      navigation.navigate('ActionsForPurchaseScreen');
-    } else {
+  const handleLogin = async () => {
+    if (!email || !password) {   
       Alert.alert('Erro', 'Por favor, preencha ambos os campos');
     }
+
+    try {
+      const response = await LoginService.login({
+          email, password         
+      });
+      if (response.status === 200) {
+          Alert.alert('Sucesso', 'Usuario logado');
+          navigation.navigate('ActionsForPurchaseScreen');
+      } else {
+          console.error('Erro ao logar:', response.statusText);
+          Alert.alert('Erro', 'Erro ao cadastrar usuario.');
+      }
+  } catch (error) {
+      console.error('Erro ao logar:', error);
+      Alert.alert('Erro', 'Erro ao logar.');
+  }
   };
 
   return (
@@ -35,6 +50,13 @@ const LoginScreen = () => {
       />
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Login</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => navigation.navigate('RegisterUserScreen')}>
+        <Text style={styles.registerText}>
+          Não possui conta?{' '}
+          <Text style={styles.registerLink}>Cadastrar</Text>
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -74,6 +96,16 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 18,
+    fontWeight: 'bold',
+  },
+  registerText: {
+    marginTop: 20,
+    textAlign: 'center',
+    fontSize: 16,
+    color: '#333',
+  },
+  registerLink: {
+    color: '#5C5696',
     fontWeight: 'bold',
   },
 });

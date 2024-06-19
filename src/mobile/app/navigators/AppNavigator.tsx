@@ -6,12 +6,15 @@ import ActionsForPurchaseScreen from '../screens/ActionsForPurchaseScreen/Action
 import TransactionsScreen from '../screens/TransactionsScreen/TransactionsScreen';
 import SellFormScreen from '../screens/SellFormScreen/SellFormScreen';
 import BuyFormScreen from '../screens/BuyFormScreen/BuyFormScreen';
+import RegisterUserScreen from '../screens/RegisterUserScreen/RegisterUserScreen';
+
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName="Login">
-      <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+    <Stack.Navigator initialRouteName="LoginScreen">
+      <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="RegisterUserScreen" component={RegisterUserScreen} />
       <Stack.Screen name="UserShares" component={UserShares} options={{ title: 'Minhas Ações' }} />
       <Stack.Screen name="ActionsForPurchaseScreen" component={ActionsForPurchaseScreen} options={{ title: 'Ações Para Compra' }} />
       <Stack.Screen name="TransactionsScreen" component={TransactionsScreen} options={{ title: 'Transações' }} />

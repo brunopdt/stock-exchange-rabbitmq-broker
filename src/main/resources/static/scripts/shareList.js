@@ -98,7 +98,7 @@ async function getSharesForPurchase() {
 
             try {
                 const brokerId = localStorage.getItem('brokerId') ?? 1;
-                //para rodar local trocar a url para http://localhost:8080/transaction/buy
+                
                 const response = await fetch('https://stock-exchange-rabbitmq-broker-gndb.onrender.com/transaction/buy', {
                     method: 'POST',
                     headers: {

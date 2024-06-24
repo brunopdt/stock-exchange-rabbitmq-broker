@@ -1,7 +1,14 @@
 package com.group1.stockexchange.controllers;
 
 import com.group1.stockexchange.models.BrokerModel;
+import com.group1.stockexchange.requests.LoginRequest;
+import com.group1.stockexchange.requests.RegisterBrokerRequest;
+import com.group1.stockexchange.responses.BaseResponse;
+import com.group1.stockexchange.responses.LoginResponse;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,7 +56,7 @@ public class BrokerController {
     }
 
     /**
-     * Método para realizar o login do usuário verificando os campos inseridos
+     * Método para realizar o login do usuário verificando os campos inseridos e redirecionar o web para a respectiva página
      * @return
      */
     @PostMapping("/login")
@@ -66,7 +73,25 @@ public class BrokerController {
     }
 
     /**
-     * Método para realizar o cadastro do usuário 
+     * Método para realizar o login do usuário verificando os campos inseridos
+     * @return ResponseEntity<LoginResponse>
+     */
+    @PostMapping("/userLogin")
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
+        BrokerModel broker = brokerService.isValidBroker(loginRequest.getEmail(), loginRequest.getPassword());
+        LoginResponse response = new LoginResponse();
+        if (broker != null) {
+            response.setUserId(broker.getId());
+            response.setMessage("Login bem-sucedido");
+            return ResponseEntity.ok(response);
+        } else {
+            response.setMessage("Login inválido");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+        }
+    }
+
+    /**
+     * Método para realizar o cadastro do usuário e redirecionar o web para a respectiva página
      * @return
      */
     @PostMapping("/register")
@@ -84,5 +109,24 @@ public class BrokerController {
         // Se o email não estiver cadastrado, proceder com o cadastro
         brokerService.registerUser(name, email, password);
         return new RedirectView("/broker/login");
+    }
+
+    /**
+     * Método para realizar o cadastro do usuário 
+     * @return
+     */
+    @PostMapping("/registerUser")
+    public ResponseEntity<BaseResponse> registerUser(@Valid @RequestBody RegisterBrokerRequest request) {
+        BaseResponse response = new BaseResponse();
+
+        if (brokerService.isEmailAlreadyRegistered(request.getEmail())) {
+            response.setMessage("O email fornecido já está cadastrado. Por favor, use outro email.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+
+        brokerService.registerUser(request.getName(), request.getEmail(), request.getPassword());
+        response.setMessage("Cadastro realizado com sucesso");
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }

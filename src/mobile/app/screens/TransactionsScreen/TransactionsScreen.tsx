@@ -1,16 +1,26 @@
 import BottomNavbar from '@/app/components/BottomNavbar';
 import TransactionCard from '@/app/components/TransactionCard';
 import TransactionService from '@/app/services/TransactionService';
+import { RouteProp, useRoute } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
+
+interface ScreenRouteParams {
+  brokerId: number
+}
+
+type ScreenRouteProp = RouteProp<{ TransactionsScreen: ScreenRouteParams }, 'TransactionsScreen'>;
 
 const TransactionsScreen = () => {
   const [transactions, setTransactions] = useState([]);
 
+  const route = useRoute<ScreenRouteProp>();
+  const { brokerId } = route.params;
+
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response: any = await TransactionService.getBrokerTransactions(1);
+        const response: any = await TransactionService.getBrokerTransactions(brokerId);
         setTransactions(response.data);
       } catch (error) {
         console.error('Erro ao buscar as transações:', error);
@@ -18,7 +28,7 @@ const TransactionsScreen = () => {
     };
 
     fetchTransactions();
-  }, []);
+  }, [brokerId]);
 
   return (
     <View style={styles.container}>
@@ -33,7 +43,7 @@ const TransactionsScreen = () => {
           />
         ))}
       </ScrollView>
-      <BottomNavbar />
+      <BottomNavbar brokerId={brokerId}/>
     </View>
   );
 };

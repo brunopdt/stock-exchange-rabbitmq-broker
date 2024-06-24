@@ -2,18 +2,18 @@ import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const BottomNavbar = () => {
+const BottomNavbar = ({ brokerId }: { brokerId: number }) => {
   const navigation = useNavigation<any>();
 
   return (
     <View style={styles.navbar}>
-      <TouchableOpacity onPress={() => navigation.navigate('ActionsForPurchaseScreen')} style={styles.button}>
+      <TouchableOpacity onPress={() => navigation.navigate('ActionsForPurchaseScreen', { brokerId })} style={styles.button}>
         <Text style={styles.buttonText}>Ações</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('UserShares')} style={styles.button}>
+      <TouchableOpacity onPress={() => navigation.navigate('UserShares', { brokerId })} style={styles.button}>
         <Text style={styles.buttonText}>Minhas Ações</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('TransactionsScreen')} style={styles.button}>
+      <TouchableOpacity onPress={() => navigation.navigate('TransactionsScreen', { brokerId })} style={styles.button}>
         <Text style={styles.buttonText}>Transações</Text>
       </TouchableOpacity>
     </View>

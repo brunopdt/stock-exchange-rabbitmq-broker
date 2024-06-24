@@ -1,26 +1,14 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import RegisterService from '@/app/services/RegisterService';
+import RegisterBrokerRequest from '@/app/requests/RegisterBrokerRequest';
+import BrokerService from '@/app/services/BrokerService';
 
-// type RootStackParamList = {
-//   LoginScreen: undefined;
-//   ActionsForPurchaseScreen: undefined; 
-// };
-
-interface RegisterUserRequest {
-    name: string;
-    email: string;
-    password: string;   
-}
-
-const RegisterUserScreen: React.FC<RegisterUserRequest> = () => {
+const RegisterUserScreen: React.FC<RegisterBrokerRequest> = () => {
   const [email, setEmail] = useState<string>('');
   const [name, setName] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  //const navigation = useNavigation<RegisterUserScreenNavigationProp>();
   const navigation = useNavigation<any>();
 
   const handleRegister = async () => {
@@ -28,20 +16,21 @@ const RegisterUserScreen: React.FC<RegisterUserRequest> = () => {
       Alert.alert('Erro', 'Por favor, preencha todos os campos');
     }
 
+    const registerRequest: RegisterBrokerRequest = {
+      email,
+      name,
+      password
+    }
+
     try {
-        const response = await RegisterService.register({
-            email, password,
-            name: ''
-        });
-        if (response.status === 200) {
+        const response = await BrokerService.register(registerRequest);
+        if (response.status === 201) {
             Alert.alert('Sucesso', 'Usuario cadastrado');
-            navigation.navigate('ActionsForPurchaseScreen');
+            navigation.navigate('LoginScreen');
         } else {
-            console.error('Erro ao cadastrar usuario:', response.statusText);
             Alert.alert('Erro', 'Erro ao cadastrar usuarioooo.');
         }
     } catch (error) {
-        console.error('Erro ao cadastrar usuario:', error);
         Alert.alert('Erro', 'Erro ao cadastrar usuario!.');
     }
 

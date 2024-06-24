@@ -1,10 +1,23 @@
 import BottomNavbar from '@/app/components/BottomNavbar';
 import ShareCard from '@/app/components/ShareCard';
 import ShareService from '@/app/services/ShareService';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
+interface ActionsForPurchaseScreenRouteParams {
+  code: string
+  brokerId: number
+}
+
+type ActionsForPurchaseScreenRouteProp = RouteProp<{ ActionsForPurchaseScreen: ActionsForPurchaseScreenRouteParams }, 'ActionsForPurchaseScreen'>;
+
 const ActionsForPurchaseScreen = () => {
+  const navigation = useNavigation<any>();
+  
+  const route = useRoute<ActionsForPurchaseScreenRouteProp>();
+  const { brokerId } = route.params;
+
   const [shares, setShares] = useState([]);
 
   useEffect(() => {
@@ -21,8 +34,7 @@ const ActionsForPurchaseScreen = () => {
   }, []);
 
   const handleSell = (code: string) => {
-    console.log(`Vender ação: ${code}`);
-    // Chamar página de comprar a ação passando o id
+    navigation.navigate('BuyFormScreen', { code, brokerId });
   };
 
   return (
@@ -38,7 +50,7 @@ const ActionsForPurchaseScreen = () => {
           />
         ))}
       </ScrollView>
-      <BottomNavbar />
+      <BottomNavbar brokerId={brokerId}/>
     </View>
   );
 };

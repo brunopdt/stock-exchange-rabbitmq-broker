@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import LoginService from '@/app/services/LoginService';
+import BrokerService from '@/app/services/BrokerService';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -14,20 +14,18 @@ const LoginScreen = () => {
     }
 
     try {
-      const response = await LoginService.login({
+      const response = await BrokerService.login({
           email, password         
       });
+
       if (response.status === 200) {
-          Alert.alert('Sucesso', 'Usuario logado');
-          navigation.navigate('ActionsForPurchaseScreen');
+        navigation.navigate('ActionsForPurchaseScreen', { brokerId: response.data.userId });
       } else {
-          console.error('Erro ao logar:', response.statusText);
-          Alert.alert('Erro', 'Erro ao cadastrar usuario.');
+          Alert.alert('Erro', 'Email ou senha inválidos.');
       }
   } catch (error) {
-      console.error('Erro ao logar:', error);
-      Alert.alert('Erro', 'Erro ao logar.');
-  }
+      Alert.alert('Erro', 'Email ou senha inválidos.');
+    }
   };
 
   return (

@@ -1,18 +1,25 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
-import BuyService from '@/app/services/BuyShareService';
-import { useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import TransactionService from '@/app/services/TransactionService';
+import OrderRequest from '@/app/requests/OrderRequest';
 
-interface BuyShareProps {
-  code: string
+interface BuyFormScreenRouteParams {
+    code: string;
+    brokerId: number
 }
 
-const BuyFormScreen: React.FC<BuyShareProps> = ({ code }) => {
-    const currentShareCode = code;
-    const [brokerId, setBrokerId] = useState<string | null>(null); // Pegar do storage
+type BuyFormScreenRouteProp = RouteProp<{ BuyFormScreen: BuyFormScreenRouteParams }, 'BuyFormScreen'>;
+
+const BuyFormScreen: React.FC = () => {
+    const navigation = useNavigation<any>();
+
+    const route = useRoute<BuyFormScreenRouteProp>();
+    const { code } = route.params;
+    const { brokerId } = route.params;
+
     const [quantity, setQuantity] = useState<string>('');
     const [price, setPrice] = useState<string>('');
-    const navigation = useNavigation<any>();
 
     const handleBuy = async () => {
         if (!brokerId) {
@@ -20,24 +27,24 @@ const BuyFormScreen: React.FC<BuyShareProps> = ({ code }) => {
             return;
         }
 
-        const buyRequest = {
-            brokerId: "1", // Trocar para Brokerid
-            active: currentShareCode,
-            stockAmount: quantity,
-            price: price,
+        const request: OrderRequest = {
+            brokerId,
+            active: code,
+            stockAmount: parseInt(quantity, 10),
+            price: parseFloat(price),
         };
 
         try {
-            const response = await BuyService.buyShare(buyRequest);
+            const response = await TransactionService.buyShare(request);
             if (response.status === 200) {
                 Alert.alert('Sucesso', 'Compra realizada com sucesso!');
-                navigation.navigate('ActionsForPurchaseScreen');
+                navigation.navigate('ActionsForPurchaseScreen', { brokerId });
             } else {
-                console.error('Erro ao realizar compra:', response.statusText);
+                console.error('Erro ao realizar a compra: ', response.statusText);
                 Alert.alert('Erro', 'Erro ao realizar compra.');
             }
         } catch (error) {
-            console.error('Erro ao realizar compra:', error);
+            console.error('Erro ao realizar compra: ', error);
             Alert.alert('Erro', 'Erro ao realizar compra.');
         }
     };
@@ -48,9 +55,9 @@ const BuyFormScreen: React.FC<BuyShareProps> = ({ code }) => {
             <Text style={styles.label}>Quantidade:</Text>
             <TextInput
                 style={styles.input}
-                keyboardType="numeric"
                 value={quantity}
                 onChangeText={setQuantity}
+                keyboardType="numeric"
             />
             <Text style={styles.label}>Valor:</Text>
             <TextInput
@@ -59,7 +66,7 @@ const BuyFormScreen: React.FC<BuyShareProps> = ({ code }) => {
                 value={price}
                 onChangeText={setPrice}
             />
-            <Button title="Confirmar Compra" onPress={handleBuy} />
+            <Button title="Confirmar Compra" onPress={handleBuy} color="#5C5696" />
         </View>
     );
 };
